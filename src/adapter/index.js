@@ -7,7 +7,7 @@ function headers() {
     Accept: "application/json"
   };
 }
-
+//
 export class RestfulAdapter {
   static indexFetch(route) {
     return fetch(`${baseUrl}/${route}`, getRequest()).then(responseHandler);
@@ -34,9 +34,9 @@ export class RestfulAdapter {
     }).then(responseHandler);
   }
 }
-
-//these may not be necessary, but if you're setting up a variety of get, post,
-//and patch requests, it may be helpful to abstract their structure as well:
+//
+// //these may not be necessary, but if you're setting up a variety of get, post,
+// //and patch requests, it may be helpful to abstract their structure as well:
 function getRequest() {
   return {
     headers: headers()

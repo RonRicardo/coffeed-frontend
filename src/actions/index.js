@@ -1,4 +1,4 @@
-import { SHOW_FRIENDS } from './types'
+import { /* your type here, CHANGE_MESSAGE */ } from './types'
 
 // Define and export your action creators here
 // EXAMPLE:
@@ -8,9 +8,3 @@ import { SHOW_FRIENDS } from './types'
 //     type: CHANGE_MESSAGE
 //   }
 // }
-
-export const showAllFriends = () => {
-  return {
-    type: SHOW_FRIENDS
-  }
-}

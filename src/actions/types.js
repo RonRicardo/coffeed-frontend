@@ -1,5 +1,3 @@
 //EXAMPLE
 
 // export const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
-
-export const SHOW_FRIENDS = 'SHOW_FRIENDS'
