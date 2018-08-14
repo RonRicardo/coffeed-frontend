@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './App.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 // IF YOU WISH TO USE REACT ROUTER uncomment lines 7,19,21
@@ -13,8 +13,8 @@ import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 
 const store = configureStore()
-// console.log('store', store)
-// console.log('state', store.getState())
+console.log('store', store)
+console.log('state', store.getState())
 
 ReactDOM.render(
   <Provider store={store}>
