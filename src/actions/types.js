@@ -1,3 +1,6 @@
 //EXAMPLE
 
-// export const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+export const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+
+export const FETCH_FRIENDS =
+'FETCH_FRIENDS'

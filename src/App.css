@@ -44,6 +44,10 @@
   box-shadow: 5px 5px rgba(0, 18, 137, 1);
 }
 
+.BootstrapPanel {
+  text-align: center;
+}
+
 h1 {
   font-weight: bolder;
   margin-bottom: 0px;
