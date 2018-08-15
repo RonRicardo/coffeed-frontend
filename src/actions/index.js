@@ -1,4 +1,4 @@
-import { FRIEND_LOADING, SELECT_FRIEND, FRIEND_LOAD, PENDING_FRIENDS } from './types';
+import { FRIEND_LOADING, SELECT_FRIEND, FRIEND_LOAD, PENDING_FRIENDS, EDIT_LAST_SEEN } from './types';
 import { RestfulAdapter } from "../adapter";
 
 
@@ -14,7 +14,7 @@ import { RestfulAdapter } from "../adapter";
 export function fetchFriends() {
   return dispatch => {
     dispatch({ type: FRIEND_LOADING });
-    RestfulAdapter.indexFetch("/users/1/friends/").then(data => {
+    RestfulAdapter.indexFetch("/users/1/friendships/").then(data => {
       dispatch({ type: FRIEND_LOAD, payload: data });
     });
   };
@@ -28,6 +28,14 @@ export function fetchPendingFriends() {
   };
 }
 
-export function selectFriend(friend) {
-  return { type: SELECT_FRIEND, payload: friend };
+export function editLastSeen() {
+  return dispatch => {
+    RestfulAdapter.editFetch('/users/1/friends').then(data => {
+      dispatch({ type: EDIT_LAST_SEEN, payload: data });
+    });
+  };
 }
+
+// export function editLastSeen(friend) {
+//   return { type: EDIT_FRIEND, payload: data };
+// }
