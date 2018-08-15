@@ -4,7 +4,7 @@ import FriendCard from "./FriendCard";
 import FriendRequest from './FriendRequest';
 import { fetchFriends, fetchPendingFriends } from './actions';
 import { connect } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Grid } from "react-bootstrap";
 
 class FriendContainer extends React.Component {
   //
@@ -57,13 +57,16 @@ class FriendContainer extends React.Component {
     });
     console.log(this.props)
     return (
-      <Row className="show-grid">
-      <h2>Current Friends</h2>
-        <Col lg={6} >{fetchedFriends}</Col>
-
-        <h2>Friend Requests</h2>
-        <Col lg={6} >{fetchedPendingFriends}</Col>
-      </Row>
+    <div className="friend-grid">
+      <Grid>
+        <Row>
+          <h2>Friend Requests</h2>
+        <Col md={4}>{fetchedPendingFriends}</Col>
+          <h2>Current Friends</h2>
+        <Col md={8}>{fetchedFriends}</Col>
+        </Row>
+      </Grid>
+    </div>
     );
   }
 }
