@@ -1,4 +1,4 @@
-import { FRIEND_LOADING, SELECT_FRIEND, FRIEND_LOAD, PENDING_FRIENDS, EDIT_LAST_SEEN } from './types';
+import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS } from './types';
 import { RestfulAdapter } from "../adapter";
 
 
@@ -28,13 +28,13 @@ export function fetchPendingFriends() {
   };
 }
 
-export function editLastSeen() {
-  return dispatch => {
-    RestfulAdapter.editFetch('/users/1/friends').then(data => {
-      dispatch({ type: EDIT_LAST_SEEN, payload: data });
-    });
-  };
-}
+// export function editLastSeen() {
+//   return dispatch => {
+//     RestfulAdapter.editFetch('/users/1/friends').then(data => {
+//       dispatch({ type: EDIT_LAST_SEEN, payload: data });
+//     });
+//   };
+// }
 
 // export function editLastSeen(friend) {
 //   return { type: EDIT_FRIEND, payload: data };

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+
 // IF YOU WISH TO USE REACT ROUTER uncomment lines 7,19,21
 // import { BrowserRouter as Router } from 'react-router-dom';
 
