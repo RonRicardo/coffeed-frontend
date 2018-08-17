@@ -3,7 +3,7 @@ import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS } from '../actions/types'
 
 export default function friendReducer(
   state = {
-    friends: [], pendingFriends: [], loading: false,
+    friends: [], pendingFriends: [], selectedFriend: null, loading: false,
   },
     action
   ) {
@@ -24,15 +24,15 @@ export default function friendReducer(
           ...state,
           pendingFriends: action.payload,
       };
-    // case SELECT_FRIEND:
+    // case "SELECT_FRIEND":
     //   return {
     //     ...state,
     //     selectedFriend: action.payload
     //   };
-    // case EDIT_LAST_SEEN:
+    // case "UPDATE_FORM":
     //   return {
     //     ...state,
-    //     date: {...state.date, ...action.payload}
+    //     formData: {...state.formData, ...action.payload}
     //   }
     // case "SET_HOBBIT":
     //
