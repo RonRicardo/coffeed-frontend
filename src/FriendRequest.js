@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Button, Confirm } from 'semantic-ui-react'
 import { RestfulAdapter } from './adapter'
 
-
 class FriendRequest extends React.Component {
 
   state = {

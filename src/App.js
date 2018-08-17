@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import { connect } from 'react-redux';
-import Header from './Header';
 import FriendContainer from './FriendContainer';
+import UserView from './UserView';
 
 class App extends Component {
 
@@ -16,11 +14,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
 
-    return {
-      state: {...state}
-    };
-}
-
-export default connect(mapStateToProps, null)(App);
+export default App;

@@ -1,7 +1,9 @@
 import React from 'react';
 import Calendar from 'react-calendar';
-import { Card, Button, Confirm } from 'semantic-ui-react'
-import {RestfulAdapter} from './adapter'
+import { Card, Button, Confirm } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { updateLastSeen } from './actions';
+import { RestfulAdapter } from './adapter';
 
 
 class FriendCard extends React.Component {
@@ -37,6 +39,7 @@ class FriendCard extends React.Component {
   calendarOnChange = (date) => this.setState({ date })
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Card>
@@ -70,4 +73,8 @@ class FriendCard extends React.Component {
   }
 }
 
-export default FriendCard
+const mapStateToProps = (state) => ({
+  friend: state.friend
+});
+
+export default connect(mapStateToProps, null)(FriendCard);
