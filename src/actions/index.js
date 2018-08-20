@@ -27,7 +27,3 @@ export function updateLastSeen() {
     });
   };
 }
-
-// export function editLastSeen(friend) {
-//   return { type: EDIT_FRIEND, payload: data };
-// }
