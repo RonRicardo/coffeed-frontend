@@ -1,10 +1,10 @@
 import React from "react";
-import FriendCard from "./FriendCard";
+import './App.css';
 import { fetchFriends, fetchPendingFriends } from './actions';
 import { connect } from "react-redux";
-import { Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
-import FriendRequestList from './FriendRequestList';
-import FriendList from './FriendList';
+import { Container, Divider, Header } from 'semantic-ui-react'
+import { FriendList, RecievedFriendRequests, AddFriend } from './FriendList';
+import PlansForm from './PlansForm';
 
 class FriendContainer extends React.Component {
 
@@ -23,43 +23,13 @@ class FriendContainer extends React.Component {
     // });
     return (
     <Container>
-      {/* Heads up! We apply there some custom styling, you usually will not need it. */}
-      <style>{`
-        html, body {
-          background-color: #efeae3;
-        }
-
-        #friendSideBar {
-          justify-content: center;
-
-        }
-
-        #friendBottomBox {
-          align-content: center;
-        }
-
-        p {
-          align-content: center;
-          background-color: #c9a674;
-          color: #fff;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          min-height: 6em;
-        }
-      }
-      `}</style>
-
       <Header as='h2' icon inverted textAlign='center'>
         Hey hey hey
       </Header>
       <Divider />
-        <Container id="friendSideBar">
-                <FriendRequestList friends={this.props.pendingFriends} />
-        </Container>
-        <Container id="friendBottomBox">
+                <RecievedFriendRequests friends={this.props.pendingFriends} />
                 <FriendList friends={this.props.friends} />
-        </Container>
+                <PlansForm friends={this.props.friends} />
     </Container>
     );
   }

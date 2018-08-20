@@ -39,7 +39,6 @@ class FriendCard extends React.Component {
   calendarOnChange = (date) => this.setState({ date })
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Card>
