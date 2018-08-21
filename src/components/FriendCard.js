@@ -1,5 +1,6 @@
 import React from 'react';
 import Calendar from 'react-calendar';
+import { updateLastSeen } from '../actions';
 import { Card, Button, ButtonGroup, Confirm } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { RestfulAdapter } from '../adapter';
@@ -12,7 +13,8 @@ class FriendCard extends React.Component {
     confirmationToggle: false,
     result: '',
     confirmationText: '',
-    popupOpen: false
+    popupOpen: false,
+    userAction: ''
   }
 
   deleteFriend = () => {
@@ -41,6 +43,7 @@ class FriendCard extends React.Component {
     switch (this.state.userAction){
       case 'update':
         RestfulAdapter.editFetch('users/1/friendships', this.props.friendship_id, {last_seen: this.state.date })
+          updateLastSeen()
           this.toggleCalendar()
         break;
       case 'delete':
@@ -58,6 +61,7 @@ class FriendCard extends React.Component {
   calendarOnChange = (date) => this.setState({ date })
 
   render() {
+    // console.log(this.props.friends)
     return (
       <div>
         <Card>
@@ -95,7 +99,7 @@ class FriendCard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  friend: state.friend
+  friends: state.friends
 });
 
-export default connect(mapStateToProps, null)(FriendCard);
+export default connect(mapStateToProps, { updateLastSeen })(FriendCard);

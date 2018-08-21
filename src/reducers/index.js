@@ -1,5 +1,5 @@
 // a reducer is a PURE function that takes the previous state and an action as arguments and returns new state based on the action.type
-import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS } from '../actions/types'
+import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS, UPDATE_FRIEND_REQUESTS } from '../actions/types'
 
 export default function friendReducer(
   state = {
@@ -28,6 +28,11 @@ export default function friendReducer(
         return {
           ...state,
           plans: action.payload
+        }
+      case UPDATE_FRIEND_REQUESTS:
+        return {
+          ...state,
+          friends: state.friends.filter( friend => friend === action.payload)
         }
     default:
       return state;

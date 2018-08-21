@@ -14,12 +14,13 @@ class FriendRequest extends React.Component {
 
   handleConfirmationToggle = () => this.setState({ confirmationToggle: true })
 
-  handleConfirm = () => {
+  handleModalConfirm = () => {
     this.setState({ result: 'confirmed', confirmationToggle: false })
     RestfulAdapter.editFetch('users/1/friend_requests', this.props.id)
+    .then()
   }
 
-  handleCancel = () => {
+  handleModalCancel = () => {
     this.setState({ result: 'cancelled', confirmationToggle: false })
   }
 
@@ -46,7 +47,7 @@ class FriendRequest extends React.Component {
           </Card.Header>
           <p>{this.props.username} would like to grab coffee sometime!</p>
           <Popup
-            trigger={<Button basic color='green' onClick={this.handleConfirm}>Accept</Button> }
+            trigger={<Button basic color='green' onClick={this.handleModalConfirm}>Accept</Button> }
             content={`Added ${this.props.name}!`}
             on='click'
             open={this.state.popupOpen}
@@ -57,7 +58,7 @@ class FriendRequest extends React.Component {
           <Button basic color='red' onClick={this.handleConfirmationToggle}>Reject</Button>
          <Confirm
           open={this.state.confirmationToggle}
-          onCancel={this.handleCancel}
+          onCancel={this.handleModalCancel}
           onConfirm={this.handleConfirm}
           // eslint-disable-next-line
           content={`Do you really want to reject ${this.props.username}\'s friend request?`}

@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
-import { Form, Button, Container } from 'semantic-ui-react'
+import { Form, Button, Container, Dropdown } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
+const friendOptions = [
+  {
+    text: 'Jenny Hess',
+    value: 'Jenny Hess',
+    image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
+  }
+]
 
 class PlanForm extends Component {
 
   state = {
     date: moment(),
-    place: ''
+    place: '',
+    friend: ''
   }
 
   handleChange = (newDate) => {
     this.setState({ date: newDate });
+  }
+
+  selectFriend = (value) => {
+    this.setState({friend: value})
+  }
+
+  handleSubmit = () => {
+
   }
 
   render() {
@@ -28,8 +44,15 @@ class PlanForm extends Component {
                 onChange={this.handleChange}
                 />
             </Form.Field>
+            <Dropdown placeholder='Select Friend'
+              fluid selection
+              options={friendOptions}
+              onChange={this.selectFriend}
+               />
               <Form.Field>
-            <Button type='submit'>Submit</Button>
+            <Button
+            onClick={this.handleSubmit}
+            type='submit'>Submit</Button>
           </Form.Field>
         </Form>
        </Container>
