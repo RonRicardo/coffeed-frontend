@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
-import App from './App';
+import './';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 // IF YOU WISH TO USE REACT ROUTER uncomment lines 7,19,21
