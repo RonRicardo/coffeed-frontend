@@ -1,4 +1,4 @@
-import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN } from './types';
+import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN, FETCH_PLANS } from './types';
 import { RestfulAdapter } from "../adapter";
 
 
@@ -24,6 +24,14 @@ export function updateLastSeen() {
   return dispatch => {
     RestfulAdapter.editFetch('/users/1/friendships').then(data => {
       dispatch({ type: UPDATE_LAST_SEEN, payload: data });
+    });
+  };
+}
+
+export function fetchPlans(){
+  return dispatch => {
+    RestfulAdapter.indexFetch('/users/1/plans').then(data =>{
+      dispatch({ type: FETCH_PLANS, payload: data})
     });
   };
 }

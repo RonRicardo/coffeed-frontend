@@ -1,9 +1,8 @@
 import React from 'react';
 import Calendar from 'react-calendar';
-import { Card, Button, Confirm } from 'semantic-ui-react';
+import { Card, Button, ButtonGroup, Confirm } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { updateLastSeen } from './actions';
-import { RestfulAdapter } from './adapter';
+import { RestfulAdapter } from '../adapter';
 
 
 class FriendCard extends React.Component {
@@ -11,25 +10,45 @@ class FriendCard extends React.Component {
     showCalendar: false,
     date: new Date(),
     confirmationToggle: false,
-    result: ''
+    result: '',
+    confirmationText: '',
+    popupOpen: false
+  }
+
+  deleteFriend = () => {
+      this.setState({
+         userAction: 'delete',
+         confirmationText: `Do you really want to remove ${this.props.name}?`})
+      this.handleConfirmationToggle()
   }
 
  toggleCalendar = () => {
    this.setState((prevState) => {
-     return {showCalendar: !prevState.showCalendar};
+     return {
+       userAction: 'update',
+       showCalendar: !prevState.showCalendar,
+       confirmationText: `Is ${this.state.date} the last time you saw ${this.props.name}?`};
    });
  }
-
-  handleClickDay = (e) => {
-    this.handleConfirmationToggle()
-  }
 
   handleConfirmationToggle = () => this.setState({ confirmationToggle: true })
 
   handleConfirm = () => {
-    this.setState({ result: 'confirmed', confirmationToggle: false })
-    RestfulAdapter.editFetch('users/1/friendships', this.props.friendship_id, {last_seen: this.state.date })
-    this.toggleCalendar()
+    this.setState({
+      result: 'confirmed',
+      confirmationToggle: false
+    })
+    switch (this.state.userAction){
+      case 'update':
+        RestfulAdapter.editFetch('users/1/friendships', this.props.friendship_id, {last_seen: this.state.date })
+          this.toggleCalendar()
+        break;
+      case 'delete':
+        RestfulAdapter.deleteFetch('users/1/friends/destroy', this.props.friend_id)
+        break;
+      default:
+        alert('why jesus')
+    }
   }
 
   handleCancel = () => {
@@ -46,24 +65,27 @@ class FriendCard extends React.Component {
             {this.props.username}
             </Card.Header>
              <Card.Content>
+
               <p>Name: {this.props.name}</p>
               <p>Favorite Place: Foo Bar</p>
               <p>Last seen: {this.props.last_seen || "hasn't been seen yet!"}</p>
-              {this.state.showCalendar ?
+              { this.state.showCalendar ?
                 <Calendar
                    onChange={this.calendarOnChange}
                    value={this.state.date}
-                   onClickDay={this.handleClickDay}
+                   onClickDay={this.handleConfirmationToggle}
                  />
                  :
-                  <p><Button onClick={this.toggleCalendar}>Update?</Button>
-                  </p>
+                  <ButtonGroup>
+                    <Button color='teal' onClick={this.toggleCalendar}>Update?</Button>
+                    <Button color='red' onClick={this.deleteFriend}>Remove?</Button>
+                  </ButtonGroup>
               }
               <Confirm
                open={this.state.confirmationToggle}
                onCancel={this.handleCancel}
                onConfirm={this.handleConfirm}
-               content={`Is ${this.state.date} the last time you saw ${this.props.name}?`}
+               content={this.state.confirmationText}
               />
              </Card.Content>
          </Card>
