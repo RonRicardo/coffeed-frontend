@@ -8,16 +8,24 @@ const friendOptions = [
   {
     text: 'Jenny Hess',
     value: 'Jenny Hess',
-    image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
   }
 ]
+
+const dropdownFriends = (friends) => {
+  friends.map(friend => {
+    const formatFriends = {};
+      formatFriends.text = friend.name;
+      formatFriends.value = friend.id;
+  return formatFriends;
+ })
+}
 
 class PlanForm extends Component {
 
   state = {
     date: moment(),
     place: '',
-    friend: ''
+    friend_id: ''
   }
 
   handleChange = (newDate) => {
@@ -29,7 +37,7 @@ class PlanForm extends Component {
   }
 
   handleSubmit = () => {
-
+    console.log(this.state)
   }
 
   render() {

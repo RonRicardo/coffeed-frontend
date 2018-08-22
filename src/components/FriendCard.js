@@ -42,8 +42,7 @@ class FriendCard extends React.Component {
     })
     switch (this.state.userAction){
       case 'update':
-        RestfulAdapter.editFetch('users/1/friendships', this.props.friendship_id, {last_seen: this.state.date })
-          updateLastSeen()
+          this.props.updateLastSeen(this.props.friendship_id, this.state.date)
           this.toggleCalendar()
         break;
       case 'delete':
@@ -58,10 +57,10 @@ class FriendCard extends React.Component {
     this.setState({ result: 'cancelled', confirmationToggle: false })
   }
 
-  calendarOnChange = (date) => this.setState({ date })
+  calendarOnChange = (date) => this.setState({ date,
+  confirmationText: `Is ${date} the last time you saw ${this.props.name}?` })
 
   render() {
-    // console.log(this.props.friends)
     return (
       <div>
         <Card>

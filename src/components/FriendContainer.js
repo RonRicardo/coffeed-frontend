@@ -20,8 +20,8 @@ class FriendContainer extends React.Component {
         Hey hey hey
       </Header>
       <Divider />
-        <RecievedFriendRequests friends={this.props.pendingFriends} />
-        <FriendList friends={this.props.friends} />
+        <RecievedFriendRequests />
+        <FriendList />
         <PlansForm friends={this.props.friends} />
     </Container>
     );
@@ -29,4 +29,4 @@ class FriendContainer extends React.Component {
 }
 
 
-export default connect((state)=> ({friends: state.friends, pendingFriends: state.pendingFriends}), { fetchFriends, fetchPendingFriends })(FriendContainer)
+export default connect(null, { fetchFriends, fetchPendingFriends })(FriendContainer)
