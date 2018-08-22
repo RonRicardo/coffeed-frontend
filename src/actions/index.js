@@ -1,4 +1,4 @@
-import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN, FETCH_PLANS, ACCEPT_FRIEND } from './types';
+import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN, FETCH_PLANS, ACCEPT_FRIEND, REJECT_FRIEND, DELETE_FRIEND } from './types';
 import { RestfulAdapter } from "../adapter";
 
 
@@ -28,12 +28,29 @@ export function updateLastSeen(friendship_id, date) {
   };
 }
 
-export function acceptFriendReq(friend_id){
+export function acceptFriendReq(id){
   return dispatch => {
-    RestfulAdapter.editFetch('users/1/pending_friends', friend_id)
+    RestfulAdapter.editFetch('users/1/friend_requests', id)
     .then(data => {
-      debugger;
       dispatch({ type: ACCEPT_FRIEND, payload: data })
+    })
+  }
+}
+
+export function rejectFriendReq(id){
+  return dispatch => {
+    RestfulAdapter.deleteFetch('users/1/friend_requests', id)
+    .then(data => {
+      dispatch({ type: REJECT_FRIEND, payload: data })
+    })
+  }
+}
+
+export function deleteFriend(id){
+  return dispatch => {
+    RestfulAdapter.deleteFetch('users/1/friends/destroy', id)
+    .then(data => {
+      dispatch({ type: DELETE_FRIEND, payload: data })
     })
   }
 }

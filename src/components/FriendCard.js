@@ -1,10 +1,9 @@
 import React from 'react';
 import Calendar from 'react-calendar';
-import { updateLastSeen } from '../actions';
+import { updateLastSeen, deleteFriend } from '../actions';
 import { Card, Button, ButtonGroup, Confirm } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { RestfulAdapter } from '../adapter';
-
 
 class FriendCard extends React.Component {
   state = {
@@ -17,7 +16,7 @@ class FriendCard extends React.Component {
     userAction: ''
   }
 
-  deleteFriend = () => {
+  deleteOption = () => {
       this.setState({
          userAction: 'delete',
          confirmationText: `Do you really want to remove ${this.props.name}?`})
@@ -46,7 +45,7 @@ class FriendCard extends React.Component {
           this.toggleCalendar()
         break;
       case 'delete':
-        RestfulAdapter.deleteFetch('users/1/friends/destroy', this.props.friend_id)
+          this.props.deleteFriend(this.props.friend_id)
         break;
       default:
         alert('why jesus')
@@ -81,7 +80,7 @@ class FriendCard extends React.Component {
                  :
                   <ButtonGroup>
                     <Button color='teal' onClick={this.toggleCalendar}>Update?</Button>
-                    <Button color='red' onClick={this.deleteFriend}>Remove?</Button>
+                    <Button color='red' onClick={this.deleteOption}>Remove?</Button>
                   </ButtonGroup>
               }
               <Confirm
@@ -101,4 +100,4 @@ const mapStateToProps = (state) => ({
   friends: state.friends
 });
 
-export default connect(mapStateToProps, { updateLastSeen })(FriendCard);
+export default connect(mapStateToProps, { updateLastSeen, deleteFriend })(FriendCard);

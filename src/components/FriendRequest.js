@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, Button, Confirm, Popup, ButtonGroup } from 'semantic-ui-react'
-import { RestfulAdapter } from '../adapter'
-import { acceptFriendReq } from '../actions'
+// import { RestfulAdapter } from '../adapter'
+import { acceptFriendReq, rejectFriendReq } from '../actions'
+import { connect } from 'react-redux'
 
 const timeoutLength = 2000
 
@@ -17,7 +18,12 @@ class FriendRequest extends React.Component {
 
   handleModalConfirm = () => {
     this.setState({ result: 'confirmed', confirmationToggle: false })
-    acceptFriendReq(this.props.friend_id)
+    this.props.acceptFriendReq(this.props.id)
+  }
+
+  handleModalReject = () => {
+    this.setState({ result: 'confirmed', confirmationToggle: false })
+    this.props.rejectFriendReq(this.props.id)
   }
 
   handleModalCancel = () => {
@@ -60,7 +66,7 @@ class FriendRequest extends React.Component {
                <Confirm
                 open={this.state.confirmationToggle}
                 onCancel={this.handleModalCancel}
-                onConfirm={this.handleConfirm}
+                onConfirm={this.handleModalReject}
                 // eslint-disable-next-line
                 content={`Do you really want to reject ${this.props.username}\'s friend request?`}
                />
@@ -72,4 +78,9 @@ class FriendRequest extends React.Component {
   }
 }
 
-export default FriendRequest
+
+const mapStateToProps = (state) => (
+   {pendingFriends: state.pendingFriends}
+);
+
+export default connect(mapStateToProps, { acceptFriendReq, rejectFriendReq })(FriendRequest);
