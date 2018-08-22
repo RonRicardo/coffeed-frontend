@@ -1,5 +1,5 @@
 // a reducer is a PURE function that takes the previous state and an action as arguments and returns new state based on the action.type
-import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS, ACCEPT_FRIEND, UPDATE_LAST_SEEN } from '../actions/types'
+import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS, ACCEPT_FRIEND, REJECT_FRIEND, UPDATE_LAST_SEEN, DELETE_FRIEND } from '../actions/types'
 
 export default function friendReducer(
   state = {
@@ -40,12 +40,33 @@ export default function friendReducer(
           friends: updateFriends
         }
       case ACCEPT_FRIEND:
-        // const Requests = [...state.pendingFriends]
-        // const friendObj = Requests.find(friend => friend.id === action.payload.friend.id)
-        debugger;
+        let requests = [...state.pendingFriends]
+        const acceptFriend = requests.find(req => req.id === action.payload.friend_id)
+        const acceptedIndex = requests.indexOf(acceptFriend)
+        requests.splice(friendIndex, 1)
         return {
           ...state,
+          pendingFriends: requests
         }
+        case REJECT_FRIEND:
+          requests = [...state.pendingFriends]
+          const rejectedFriend = requests.find(req => req.id === action.payload.friend_id)
+          const rejectIndex = requests.indexOf(rejectedFriend)
+          requests.splice(rejectIndex, 1)
+          return {
+            ...state,
+            pendingFriends: requests
+          }
+        case DELETE_FRIEND:
+          let friends = [...state.friends]
+          const deletedF = friends.find(frd => frd.id === action.payload.friend_id)
+          const deleteIndex = friends.indexOf(deletedF)
+          friends.splice(deleteIndex, 1)
+          return {
+            ...state,
+            friends: friends
+          }
+
     default:
       return state;
   }

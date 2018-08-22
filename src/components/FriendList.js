@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 // import CreateFriendRequest from './AddFriend'
 
 const RecievedFriendRequests1 = (props) => {
-  return props.friends.map(friend => {
+  return props.pendingFriends.map(friend => {
+    debugger;
       return <FriendRequest {...friend} key={friend.id} />;
   });
 }
 
 const mapFriendRequestsToProps = (state) => {
-  return {friends: state.pendingFriends}
+  return {pendingFriends: state.pendingFriends}
 }
 
 export const RecievedFriendRequests = connect( mapFriendRequestsToProps )(RecievedFriendRequests1)
@@ -19,7 +20,7 @@ export const RecievedFriendRequests = connect( mapFriendRequestsToProps )(Reciev
 
 const FriendList1 = (props) => {
   return props.friends.map(friend => {
-      return <FriendCard {...friend} key={friend.id} />;
+      return <FriendCard {...friend} key={friend.friend_id} />;
   });
 }
 
