@@ -58,13 +58,13 @@ export default function friendReducer(
             pendingFriends: requests
           }
         case DELETE_FRIEND:
-          let friends = [...state.friends]
-          const deletedF = friends.find(frd => frd.id === action.payload.friend_id)
-          const deleteIndex = friends.indexOf(deletedF)
-          friends.splice(deleteIndex, 1)
+          const prevFriends = [...state.friends]
+          const deletedF = prevFriends.find(frd => frd.friendship_id === action.payload.friendship_id)
+          const deleteIndex = prevFriends.indexOf(deletedF)
+          prevFriends.splice(deleteIndex, 1)
           return {
             ...state,
-            friends: friends
+            friends: prevFriends
           }
 
     default:
