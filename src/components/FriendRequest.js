@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Button, Confirm, Popup } from 'semantic-ui-react'
+import { Card, Button, Confirm, Popup, ButtonGroup } from 'semantic-ui-react'
 import { RestfulAdapter } from '../adapter'
+import { acceptFriendReq } from '../actions'
 
 const timeoutLength = 2000
 
@@ -16,8 +17,7 @@ class FriendRequest extends React.Component {
 
   handleModalConfirm = () => {
     this.setState({ result: 'confirmed', confirmationToggle: false })
-    RestfulAdapter.editFetch('users/1/friend_requests', this.props.id)
-    .then()
+    acceptFriendReq(this.props.friend_id)
   }
 
   handleModalCancel = () => {
@@ -46,23 +46,25 @@ class FriendRequest extends React.Component {
            <Card.Meta> {/*props.friend.username*/} </Card.Meta>
           </Card.Header>
           <p>{this.props.username} would like to grab coffee sometime!</p>
-          <Popup
-            trigger={<Button basic color='green' onClick={this.handleModalConfirm}>Accept</Button> }
-            content={`Added ${this.props.name}!`}
-            on='click'
-            open={this.state.popupOpen}
-            onClose={this.handlePopClose}
-            onOpen={this.handlePopOpen}
-            position='top right'
-         />
-          <Button basic color='red' onClick={this.handleConfirmationToggle}>Reject</Button>
-         <Confirm
-          open={this.state.confirmationToggle}
-          onCancel={this.handleModalCancel}
-          onConfirm={this.handleConfirm}
-          // eslint-disable-next-line
-          content={`Do you really want to reject ${this.props.username}\'s friend request?`}
-         />
+          <ButtonGroup>
+            <Popup
+                trigger={<Button basic color='green' onClick={this.handleModalConfirm}>Accept</Button> }
+                content={`Added ${this.props.name}!`}
+                on='click'
+                open={this.state.popupOpen}
+                onClose={this.handlePopClose}
+                onOpen={this.handlePopOpen}
+                position='top right'
+             />
+            <Button basic color='red' onClick={this.handleConfirmationToggle}>Reject</Button>
+               <Confirm
+                open={this.state.confirmationToggle}
+                onCancel={this.handleModalCancel}
+                onConfirm={this.handleConfirm}
+                // eslint-disable-next-line
+                content={`Do you really want to reject ${this.props.username}\'s friend request?`}
+               />
+          </ButtonGroup>
         </Card.Content>
      </Card>
     </div>
