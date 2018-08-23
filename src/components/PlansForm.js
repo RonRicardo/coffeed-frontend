@@ -15,10 +15,6 @@ class PlanForm extends Component {
     friend_id: ''
   }
 
-  componentDidMount(){
-    this.props.renderDropdownFriends()
-  }
-
 
   handleChange = (newDate) => {
     this.setState({ date: newDate });
@@ -70,4 +66,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { renderDropdownFriends })(PlanForm);
+
+export default connect(mapStateToProps)(PlanForm);

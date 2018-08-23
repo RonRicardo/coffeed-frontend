@@ -4,6 +4,7 @@ import Plan from './Plan';
 import { connect } from 'react-redux';
 
 const PlansList1 = (props) => {
+  console.log(props)
   return (
    <List>
       {props.plans.map(
@@ -17,4 +18,4 @@ const mapStateToProps = (state) => {
   return {plans: state.plans.plans}
 }
 
-export const PlansList = connect( mapStateToProps)(PlansList1)
+export const PlansList = connect( mapStateToProps )(PlansList1)

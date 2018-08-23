@@ -13,10 +13,17 @@ const friendReducer = (state = initialState, action) => {
         loading: true
       }
     case FRIEND_LOAD:
-    debugger;
+      const currF = action.payload
+        const fList = currF.map(friend => {
+          const formatFriends = {};
+            formatFriends.text = friend.name;
+            formatFriends.value = friend.friend_id;
+            return formatFriends
+          })
       return {
         ...state,
         friends: action.payload,
+        dropdownFriends: fList,
         loading: false
       };
       case PENDING_FRIENDS:
@@ -37,7 +44,6 @@ const friendReducer = (state = initialState, action) => {
       case ACCEPT_FRIEND:
         let requests = [...state.pendingFriends]
         const acceptFriend = requests.find(req => req.id === action.payload.friend_id)
-        debugger;
         const acceptedIndex = requests.indexOf(acceptFriend)
         requests.splice(acceptedIndex, 1)
         return {
@@ -63,19 +69,18 @@ const friendReducer = (state = initialState, action) => {
             ...state,
             friends: prevFriends
           }
-        case DROPDOWN_FRIENDS:
-          const currF = [...state.friends]
-            const newFriends = currF.map(friend => {
-              const formatFriends = {};
-              debugger;
-                formatFriends.text = friend.name;
-                formatFriends.value = friend.id;
-                return formatFriends
-             })
-            return {
-              ...state,
-             dropdownFriends: newFriends
-        }
+        // case DROPDOWN_FRIENDS:
+        //   const currF = [...state.friends]
+        //     const fList = currF.map(friend => {
+        //       const formatFriends = {};
+        //         formatFriends.text = friend.name;
+        //         formatFriends.value = friend.friend_id;
+        //         return formatFriends
+        //      })
+        //     return {
+        //       ...state,
+        //      dropdownFriends: fList
+        // }
     default:
       return state;
   }

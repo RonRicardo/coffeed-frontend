@@ -13,13 +13,13 @@ const planReducer = (state = initialState, action) => {
       }
       //////////////
     case CREATE_PLAN:
-      // let plans = [...state.plans]
-      //   const newPlanList = plans.find(req => req.id === action.payload.friend_id)
-      //   const acceptedIndex = plans.indexOf(acceptFriend)
-      //   newPlanList.splice(acceptedIndex, 1)
+      let plans = [...state.plans]
+        let newPlan = plans.find(plan => plan.id === action.payload.id)
+        const planIndex = plans.indexOf(newPlan)
+        plans.splice(planIndex, 1)
       return {
         ...state,
-        plans: action.payload
+        plans: [...state.plans, action.payload]
       }
     case EDIT_PLAN:
       return {
@@ -27,12 +27,16 @@ const planReducer = (state = initialState, action) => {
         plans: action.payload
       }
     case DELETE_PLAN:
-      return {
-        ...state,
-        plans: action.payload
-      }
-      default:
-      return state
+      plans = [...state.plans]
+        newPlan = plans.find(plan => plan.id === action.payload.id)
+        let deleteIndex = plans.indexOf(newPlan)
+      plans.splice(0, deleteIndex, 1)
+        return {
+          ...state,
+          plans: plans
+          }
+        default:
+          return state
     }
 }
 
