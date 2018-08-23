@@ -13,7 +13,6 @@ const friendReducer = (state = initialState, action) => {
         loading: true
       }
     case FRIEND_LOAD:
-    debugger;
       return {
         ...state,
         friends: action.payload,
@@ -67,9 +66,8 @@ const friendReducer = (state = initialState, action) => {
           const currF = [...state.friends]
             const newFriends = currF.map(friend => {
               const formatFriends = {};
-              debugger;
                 formatFriends.text = friend.name;
-                formatFriends.value = friend.id;
+                formatFriends.value = friend.friendship_id;
                 return formatFriends
              })
             return {
