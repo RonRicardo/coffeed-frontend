@@ -1,12 +1,17 @@
-.container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'menu main main main right right'
-    'menu footer footer footer footer footer';
+.friendList {
+  /* content: center; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* position: sticky; */
+  height: 100vh;
+  overflow-y: scroll;
 }
-.item1 { grid-area: header; }
-.item2 { grid-area: menu; }
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
+
+.plansList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 50vh;
+  overflow-y: scroll;
+}

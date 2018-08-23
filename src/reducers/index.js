@@ -1,9 +1,9 @@
 // a reducer is a PURE function that takes the previous state and an action as arguments and returns new state based on the action.type
-import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS, ACCEPT_FRIEND, REJECT_FRIEND, UPDATE_LAST_SEEN, DELETE_FRIEND } from '../actions/types'
+import { FRIEND_LOAD, FRIEND_LOADING, PENDING_FRIENDS, FETCH_PLANS, CREATE_PLAN, EDIT_PLAN, DELETE_PLAN, ACCEPT_FRIEND, REJECT_FRIEND, UPDATE_LAST_SEEN, DELETE_FRIEND, DROPDOWN_FRIENDS } from '../actions/types'
 
 export default function friendReducer(
   state = {
-    friends: [], pendingFriends: [], selectedFriend: null, loading: false, plans: []
+    friends: [], pendingFriends: [], selectedFriend: null, loading: false, plans: [], dropdownFriends: []
   },
     action
   ) {
@@ -29,6 +29,27 @@ export default function friendReducer(
           ...state,
           plans: action.payload
         }
+        //////////////
+      case CREATE_PLAN:
+        // let plans = [...state.plans]
+        //   const newPlanList = plans.find(req => req.id === action.payload.friend_id)
+        //   const acceptedIndex = plans.indexOf(acceptFriend)
+        //   newPlanList.splice(acceptedIndex, 1)
+        return {
+          ...state,
+          plans: action.payload
+        }
+      case EDIT_PLAN:
+        return {
+          ...state,
+          plans: action.payload
+        }
+      case DELETE_PLAN:
+        return {
+          ...state,
+          plans: action.payload
+        }
+        /////////////
       case UPDATE_LAST_SEEN:
         const updateFriends = [...state.friends]
         const friendObj = updateFriends.find(friend => friend.friendship_id === action.payload.friendship_id)
@@ -42,10 +63,12 @@ export default function friendReducer(
       case ACCEPT_FRIEND:
         let requests = [...state.pendingFriends]
         const acceptFriend = requests.find(req => req.id === action.payload.friend_id)
+        debugger;
         const acceptedIndex = requests.indexOf(acceptFriend)
-        requests.splice(friendIndex, 1)
+        requests.splice(acceptedIndex, 1)
         return {
           ...state,
+          friends: [...state.friends, action.payload.friend ],
           pendingFriends: requests
         }
         case REJECT_FRIEND:
@@ -66,7 +89,19 @@ export default function friendReducer(
             ...state,
             friends: prevFriends
           }
-
+        case DROPDOWN_FRIENDS:
+          const currF = [...state.friends]
+            const newFriends = currF.map(friend => {
+              const formatFriends = {};
+              debugger;
+                formatFriends.text = friend.name;
+                formatFriends.value = friend.id;
+                return formatFriends
+             })
+            return {
+              ...state,
+             dropdownFriends: newFriends
+        }
     default:
       return state;
   }

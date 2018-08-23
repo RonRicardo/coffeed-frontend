@@ -1,4 +1,4 @@
-import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN, FETCH_PLANS, ACCEPT_FRIEND, REJECT_FRIEND, DELETE_FRIEND } from './types';
+import { FRIEND_LOADING, FRIEND_LOAD, PENDING_FRIENDS, UPDATE_LAST_SEEN, FETCH_PLANS, EDIT_PLAN, DELETE_PLAN, CREATE_PLAN, ACCEPT_FRIEND, REJECT_FRIEND, DELETE_FRIEND, DROPDOWN_FRIENDS } from './types';
 import { RestfulAdapter } from "../adapter";
 
 
@@ -61,4 +61,33 @@ export function fetchPlans(){
       dispatch({ type: FETCH_PLANS, payload: data})
     });
   };
+}
+export function createPlan(plan){
+  return dispatch => {
+    RestfulAdapter.createFetch('/users/1/plans', plan).then(data =>{
+      dispatch({ type: CREATE_PLAN, payload: data})
+    });
+  };
+}
+
+export function editPlan(plan_id){
+  return dispatch => {
+    RestfulAdapter.editFetch('/users/1/plans', plan_id).then(data =>{
+      dispatch({ type: EDIT_PLAN, payload: data})
+    });
+  };
+}
+
+export function deletePlan(plan_id){
+  return dispatch => {
+    RestfulAdapter.deleteFetch('/users/1/plans/destroy', plan_id).then(data =>{
+      dispatch({ type: DELETE_PLAN, payload: data})
+    });
+  };
+}
+
+export function renderDropdownFriends(){
+  return dispatch => {
+      dispatch({ type: DROPDOWN_FRIENDS })
+    }
 }

@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Button, Container, Dropdown } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
+import { connect } from 'react-redux';
+import { renderDropdownFriends } from '../actions';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const friendOptions = [
-  {
-    text: 'Jenny Hess',
-    value: 'Jenny Hess',
-  }
-]
-
-const dropdownFriends = (friends) => {
-  friends.map(friend => {
-    const formatFriends = {};
-      formatFriends.text = friend.name;
-      formatFriends.value = friend.id;
-  return formatFriends;
- })
-}
 
 class PlanForm extends Component {
 
@@ -27,6 +14,11 @@ class PlanForm extends Component {
     place: '',
     friend_id: ''
   }
+
+  componentDidMount(){
+    this.props.renderDropdownFriends()
+  }
+
 
   handleChange = (newDate) => {
     this.setState({ date: newDate });
@@ -37,7 +29,7 @@ class PlanForm extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.state)
+    console.log(this.props)
   }
 
   render() {
@@ -54,7 +46,7 @@ class PlanForm extends Component {
             </Form.Field>
             <Dropdown placeholder='Select Friend'
               fluid selection
-              options={friendOptions}
+              options={this.props.dropdownFriends}
               onChange={this.selectFriend}
                />
               <Form.Field>
@@ -70,4 +62,12 @@ class PlanForm extends Component {
 
 }
 
-export default PlanForm;
+const mapStateToProps = (state) => {
+  return {
+      friends: state.friends,
+      plans: state.plans,
+      dropdownFriends: state.dropdownFriends
+    }
+}
+
+export default connect(mapStateToProps, { renderDropdownFriends })(PlanForm);
