@@ -1,18 +1,20 @@
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import Plan from './Plan'
+import Plan from './Plan';
+import { connect } from 'react-redux';
 
-export default class PlansList extends React.Component {
-
-  render() {
-    console.log(this.props)
-    return (
-      <List>
-      {this.props.plans.map(
+const PlansList1 = (props) => {
+  return (
+   <List>
+      {props.plans.map(
         plan => <Plan plan={plan} key={plan.id} />
       )}
-      </List>
-    );
-  }
-
+   </List>
+ )
 }
+
+const mapStateToProps = (state) => {
+  return {plans: state.plans}
+}
+
+export const PlansList = connect( mapStateToProps)(PlansList1)

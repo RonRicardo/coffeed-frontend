@@ -3,7 +3,6 @@ import Calendar from 'react-calendar';
 import { updateLastSeen, deleteFriend } from '../actions';
 import { Card, Button, ButtonGroup, Confirm } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { RestfulAdapter } from '../adapter';
 
 class FriendCard extends React.Component {
   state = {

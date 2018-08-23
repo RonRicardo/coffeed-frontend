@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 const RecievedFriendRequests1 = (props) => {
   return props.pendingFriends.map(friend => {
-    debugger;
       return <FriendRequest {...friend} key={friend.id} />;
   });
 }
