@@ -96,7 +96,7 @@ class FriendCard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  friends: state.friends
+  friends: state.friends.friends
 });
 
 export default connect(mapStateToProps, { updateLastSeen, deleteFriend })(FriendCard);
