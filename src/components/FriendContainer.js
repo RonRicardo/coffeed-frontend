@@ -6,7 +6,9 @@ import { Container, Divider, Header, Grid, Button } from 'semantic-ui-react'
 import { FriendList, RecievedFriendRequests } from './FriendList';
 import Nav from './Nav';
 import { PlansList } from './PlansList';
+import { withRouter } from 'react-router-dom';
 import PlansForm from './PlansForm';
+import { Route, Switch } from 'react-router'
 
 class FriendContainer extends React.Component {
 
@@ -39,11 +41,10 @@ class FriendContainer extends React.Component {
        <Grid.Column width={6}>
         <div className="friendList">
         <br/>
-         {this.state.currentFriends ?
-          <RecievedFriendRequests />
-         :
-          <FriendList />
-        }
+          <Switch>
+            <Route exact path="/friend_requests" component={RecievedFriendRequests} />
+            <Route exact path="/friends" component={FriendList} />
+          </Switch>
          </div>
         </Grid.Column>
         <Grid.Column width={10}>
@@ -61,4 +62,4 @@ class FriendContainer extends React.Component {
 }
 
 
-export default connect(null, { fetchFriends, fetchPendingFriends, fetchPlans })(FriendContainer)
+export default withRouter(connect(null, { fetchFriends, fetchPendingFriends, fetchPlans })(FriendContainer))
