@@ -64,9 +64,9 @@ class PlanForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      friends: state.friends,
-      plans: state.plans,
-      dropdownFriends: state.dropdownFriends
+      friends: state.friends.friends,
+      plans: state.plans.plans,
+      dropdownFriends: state.friends.dropdownFriends
     }
 }
 

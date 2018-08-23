@@ -11,7 +11,7 @@ const RecievedFriendRequests1 = (props) => {
 }
 
 const mapFriendRequestsToProps = (state) => {
-  return {pendingFriends: state.pendingFriends}
+  return {pendingFriends: state.friends.pendingFriends}
 }
 
 export const RecievedFriendRequests = connect( mapFriendRequestsToProps )(RecievedFriendRequests1)

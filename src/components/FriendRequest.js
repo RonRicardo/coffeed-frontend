@@ -80,7 +80,7 @@ class FriendRequest extends React.Component {
 
 
 const mapStateToProps = (state) => (
-   {pendingFriends: state.pendingFriends}
+   {pendingFriends: state.friends.pendingFriends}
 );
 
 export default connect(mapStateToProps, { acceptFriendReq, rejectFriendReq })(FriendRequest);

@@ -14,7 +14,7 @@ const PlansList1 = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return {plans: state.plans}
+  return {plans: state.plans.plans}
 }
 
 export const PlansList = connect( mapStateToProps)(PlansList1)
