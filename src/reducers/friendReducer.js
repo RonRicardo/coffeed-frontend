@@ -13,6 +13,7 @@ const friendReducer = (state = initialState, action) => {
         loading: true
       }
     case FRIEND_LOAD:
+<<<<<<< HEAD
       const currF = action.payload
         const fList = currF.map(friend => {
           const formatFriends = {};
@@ -20,6 +21,8 @@ const friendReducer = (state = initialState, action) => {
             formatFriends.value = friend.friend_id;
             return formatFriends
           })
+=======
+>>>>>>> temp
       return {
         ...state,
         friends: action.payload,
@@ -69,6 +72,7 @@ const friendReducer = (state = initialState, action) => {
             ...state,
             friends: prevFriends
           }
+<<<<<<< HEAD
         // case DROPDOWN_FRIENDS:
         //   const currF = [...state.friends]
         //     const fList = currF.map(friend => {
@@ -81,6 +85,20 @@ const friendReducer = (state = initialState, action) => {
         //       ...state,
         //      dropdownFriends: fList
         // }
+=======
+        case DROPDOWN_FRIENDS:
+          const currF = [...state.friends]
+            const newFriends = currF.map(friend => {
+              const formatFriends = {};
+                formatFriends.text = friend.name;
+                formatFriends.value = friend.friendship_id;
+                return formatFriends
+             })
+            return {
+              ...state,
+             dropdownFriends: newFriends
+        }
+>>>>>>> temp
     default:
       return state;
   }

@@ -32,4 +32,8 @@ import { Link, withRouter } from 'react-router-dom';
 // // }
 // //
 // export default connect(null, { currentView })(PlanForm);
+<<<<<<< HEAD
 export default Nav
+=======
+export default withRouter(Nav)
+>>>>>>> temp
