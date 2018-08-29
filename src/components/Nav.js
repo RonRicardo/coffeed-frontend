@@ -14,14 +14,25 @@ import { Link, withRouter } from 'react-router-dom';
     const { activeItem } = this.state
 
     return (
-      <Menu tabular>
+      <Menu >
+        <Link to="/friend_requests">
         <Menu.Item name='friendRequests' active={activeItem === 'friendRequests'} onClick={this.handleItemClick}>
-        <Link to="/friend_requests">Requests</Link>
+        Requests
         </Menu.Item>
+        </Link>
 
+        <Link to="/friends">
         <Menu.Item name='currentFriends' active={activeItem === 'currentFriends'} onClick={this.handleItemClick}>
-        <Link to="/friends">Friends</Link>
+        Friends
         </Menu.Item>
+        </Link>
+
+        <Link to="/new_plan">
+        <Menu.Item name='newPlan' active={activeItem === 'newPlan'} onClick={this.handleItemClick}>
+        Add New Plan
+        </Menu.Item>
+        </Link>
+        
       </Menu>
     )
   }

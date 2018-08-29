@@ -2,9 +2,10 @@ import React from "react";
 import '../App.css';
 import { fetchFriends, fetchPendingFriends, fetchPlans, renderDropdownFriends } from '../actions';
 import { connect } from "react-redux";
-import { Container, Divider, Header, Grid, Button } from 'semantic-ui-react'
+import { Container, Divider, Header, Grid, Button, Segment } from 'semantic-ui-react'
 import { FriendList, RecievedFriendRequests } from './FriendList';
-// import Nav from './Nav';
+import Schedule from './Schedule';
+import Nav from './Nav';
 import { PlansList } from './PlansList';
 import { withRouter } from 'react-router-dom';
 import PlansForm from './PlansForm';
@@ -34,29 +35,31 @@ class FriendContainer extends React.Component {
     return (
     <Container>
     <Header as='h2'  textAlign='center'>
-     Girl I guess
+     Coffee'd
     </Header>
-   <Grid relaxed >
-     <Grid.Row>
-       <Grid.Column width={6}>
-       <Button onClick={this.handleClick}>{this.state.currentFriends ? "Show friend Requests" : "Show current friends"}</Button>
-        <div className="friendList">
-        <br/>
-          <Switch>
-            <Route exact path="/friend_requests" component={RecievedFriendRequests} />
-            <Route exact path="/friends" component={FriendList} />
-          </Switch>
-         </div>
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <div className="plansList">
-            <PlansList />
-          </div>
-        <Divider />
-           <PlansForm />
-        </Grid.Column>
-     </Grid.Row>
-   </Grid>
+    <Nav/>
+    <Segment>
+     <Grid relaxed >
+       <Grid.Row>
+         <Grid.Column width={6}>
+          <div className="friendList">
+            <Switch>
+              <Route exact path="/friend_requests" component={RecievedFriendRequests} />
+              <Route exact path="/friends" component={FriendList} />
+              <Route exact path="/new_plan" component={Schedule} />
+            </Switch>
+           </div>
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <div className="plansList">
+              <PlansList plans={this.props.plans}/>
+            </div>
+          <Divider />
+            <Route exact path="/new_plan" component={PlansForm} />
+          </Grid.Column>
+       </Grid.Row>
+    </Grid>
+    </Segment>
     </Container>
     );
   }

@@ -15,3 +15,7 @@
   height: 50vh;
   overflow-y: scroll;
 }
+
+.body {
+  background-color: #252839 !important;
+      }

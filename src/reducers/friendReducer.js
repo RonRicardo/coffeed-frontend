@@ -88,15 +88,15 @@ const friendReducer = (state = initialState, action) => {
 =======
         case DROPDOWN_FRIENDS:
           const currF = [...state.friends]
-            const newFriends = currF.map(friend => {
+            const fList = currF.map(friend => {
               const formatFriends = {};
                 formatFriends.text = friend.name;
-                formatFriends.value = friend.friendship_id;
+                formatFriends.value = friend.friend_id;
                 return formatFriends
              })
             return {
               ...state,
-             dropdownFriends: newFriends
+             dropdownFriends: fList
         }
 >>>>>>> temp
     default:
