@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import "semantic-ui-css/semantic.css"
 
 // IF YOU WISH TO USE REACT ROUTER uncomment lines 7,19,21
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 
 // Provider is a react component which wraps your app and 'provides' your redux store to the rest of your application
 import { Provider } from 'react-redux'
@@ -20,7 +20,7 @@ console.log('state', store.getState())
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route path="/" component={App} />
+      <Route exact path="/" component={App} />
     </Router>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

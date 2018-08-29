@@ -1,6 +1,6 @@
 import React from "react";
 import '../App.css';
-import { fetchFriends, fetchPendingFriends, fetchPlans } from '../actions';
+import { fetchFriends, fetchPendingFriends, fetchPlans, renderDropdownFriends } from '../actions';
 import { connect } from "react-redux";
 import { Container, Divider, Header, Grid, Button, Segment } from 'semantic-ui-react'
 import { FriendList, RecievedFriendRequests } from './FriendList';
@@ -18,6 +18,7 @@ class FriendContainer extends React.Component {
     this.props.fetchPendingFriends()
     this.props.fetchPlans()
   }
+
 
   state = {
     currentFriends: true,

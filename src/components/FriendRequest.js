@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, Confirm, Popup, ButtonGroup } from 'semantic-ui-react'
 // import { RestfulAdapter } from '../adapter'
+import {withRouter} from 'react-router-dom'
 import { acceptFriendReq, rejectFriendReq } from '../actions'
 import { connect } from 'react-redux'
 
@@ -83,4 +84,4 @@ const mapStateToProps = (state) => (
    {pendingFriends: state.friends.pendingFriends}
 );
 
-export default connect(mapStateToProps, { acceptFriendReq, rejectFriendReq })(FriendRequest);
+export default connect(mapStateToProps, { acceptFriendReq, rejectFriendReq })(FriendRequest)
